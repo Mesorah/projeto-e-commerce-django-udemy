@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 from produto import models
 
@@ -12,8 +12,11 @@ class ListaProdutos(ListView):
     paginate_by = 10
 
 
-class DetalheProduto(View):
-    pass
+class DetalheProduto(DetailView):
+    model = models.Produto
+    template_name = 'produto/detalhe.html'
+    context_object_name = 'produto'
+    slug_url_kwarg = 'slug'
 
 
 class AdicionarAoCarrinho(View):
